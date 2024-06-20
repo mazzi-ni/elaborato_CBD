@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    # env_file:
+    #   - .env
+    # environment:
+    # MONGO_INITDB_ROOT_USERNAME: "root"
+    # MONGO_INITDB_ROOT_PASSWORD: "example"
+    # CONNECTION: "mongodb+srv://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}"
+    # command:
+    #   bash -c "mongod && mongorestore backup/ "
+    # mongod --fork --logpath /var/log/mongodb.log --dbpath /data/db &&
+    # until mongod --username root --password example --authenticationDatabase admin --eval 'print(\">>> waited for connection\")'; do
+    #   sleep 5
+    # done &&
+    # mongorestore --username root --password example --authenticationDatabase admin /backup &&
+    # mongod --shutdown &&
+    # mongod --dbpath /data/db --bind_ip_all
+    # "
+    volumes:
+      - mongodb_data:/var/lib/mongodb/data/
+      - ./backup:/backup/
+      - ./script:/generate-script/
+      - ./json:/json/
+
+volumes:
+  mongodb_data:
